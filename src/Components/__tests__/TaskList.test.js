@@ -9,21 +9,26 @@ import TaskList from "../TaskList"
 */
 
 describe("TaskList", () => {
+  let defaultProps;
+  beforeEach(() => {
+      defaultProps = {
+        mockTask: [
+        {
+            id: 1,
+            name: 'Tarea 1',
+            description: 'Description Mock',
+            done: false,
+        },
+      ]
+    }
+  })
   test("Should render some basic component with text", () => {
-      const {getAllByText} = render(<TaskList />)
+      const {getAllByText} = render(<TaskList tasks={defaultProps.mockTask}/>)
       getAllByText(/tareas/i)
   })
 
   test('Should render Task List Information', () => {
-    const mockTask = [
-      {
-        id: 1,
-        name: 'Tarea 1',
-        description: 'Description Mock',
-        done: false,
-      },
-    ];
-    const { getByText } = render(<TaskList tasks={mockTask} />);
+    const { getByText } = render(<TaskList tasks={defaultProps.mockTask} />);
     getByText(/Tarea 1/i); // Regex
   });
 
@@ -32,6 +37,18 @@ describe("TaskList", () => {
     const { getByText } = render(<TaskList tasks={mockTasks} />);
     getByText('No hay tareas para mostrar');
   });
+
+  test("Should render two tasks", () => {
+      defaultProps.mockTask = [
+        ...defaultProps.mockTask,
+        { id: 2, name: 'Otra tarea', description: 'bla' },
+      ];
+      const { getByText } = render(<TaskList tasks={defaultProps.mockTask} />);
+      getByText('Tarea 1');
+      getByText('Otra tarea');
+
+  })
+
   // it("Should delete specific task", ()=> {
 
   // })
