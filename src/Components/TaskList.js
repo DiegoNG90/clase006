@@ -3,7 +3,7 @@ const TaskList = ({tasks}) => {
         <div>
             <h2>Tareas</h2>
             {tasks?.length > 0 && tasks.map(task => (
-            <div>
+            <div key={task.id}>
                 <h4>{task.name}</h4>
                 <p>{task.description}</p>
 
