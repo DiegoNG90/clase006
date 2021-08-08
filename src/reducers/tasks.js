@@ -7,7 +7,7 @@ loading: true/false
 owner: {id: String, name: String, mail: String}
 */
 
-const initialState = {
+export const initialState = {
     tasks: [],
     selectedTask: {},
     loading: false,
